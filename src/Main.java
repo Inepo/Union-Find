@@ -12,6 +12,7 @@ public class Main {
 
         u.addPeople();
         u.addPeople();
-        u.isolated(3);
+        u.addPeople();
+        u.union(3,5);
     }
 }

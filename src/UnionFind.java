@@ -13,12 +13,12 @@ public class UnionFind {
 
     public void union (int habitant1, int habitant2){
         int r1 = habitant1;
-        while(this.amis[r1] != r1){
-            r1 = this.amis[r1];
-        }
         int r2 = habitant2;
-        while(this.amis[r2] != r2){
-            r2 = this.amis[r2];
+        while(this.amis[r1] != r1 && this.amis[r2] != r2){
+            if(this.amis[r1] != r1)
+                r1 = this.amis[r1];
+            if(this.amis[r2] != r2)
+                r2 = this.amis[r2];
         }
         this.amis[r1] = r2;
     }
@@ -34,9 +34,10 @@ public class UnionFind {
     public void addPeople(){
         ++this.nbHabitant;
         int[] amistmp = new int[this.nbHabitant];
-        for(int i = 0; i < this.nbHabitant - 1; ++i){
+        amistmp = this.amis;
+        /*for(int i = 0; i < this.nbHabitant - 1; ++i){
             amistmp[i] = this.amis[i];
-        }
+        }*/
         this.amis = new int[this.nbHabitant];
         for(int i = 0; i < this.nbHabitant - 1; ++i){
              this.amis[i] = amistmp[i];
