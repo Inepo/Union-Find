@@ -11,6 +11,7 @@ public class UnionFind {
         }
     }
 
+    //union
     public void union (int habitant1, int habitant2){
         int r1 = habitant1;
         while(this.amis[r1] != r1){
