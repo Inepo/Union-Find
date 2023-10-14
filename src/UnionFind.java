@@ -1,4 +1,4 @@
-public class UnionFind <T> {
+public class UnionFind {
 
     private int[] amis;
     private int nbHabitant;
@@ -44,19 +44,6 @@ public class UnionFind <T> {
 
         this.amis[this.nbHabitant-1] = this.nbHabitant-1;
     }
-
-    /*public void isolated(int Habitant){
-        this.amis[Habitant] = Habitant;
-        for(int i = 0; i < this.nbHabitant; ++i){
-            if (this.amis[i] == Habitant && i != Habitant){
-                int min = i;
-                if(min >= i){
-                    min = i;
-                }
-                this.amis[i] = i;
-            }
-        }
-    }*/
     public void isolated(int Habitant) {
         boolean firstOccurrenceFound = false;
         int min = 0;
