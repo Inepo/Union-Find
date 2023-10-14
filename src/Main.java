@@ -8,10 +8,15 @@ public class Main {
         u.union(2,3);
         u.union(1,3);
 
-        int t = u.find(1);
 
+        int t = u.find(3);
+        System.out.println(t);
         u.addPeople();
         u.addPeople();
-        u.isolated(3);
+        u.isolated(2);
+
+        for(int i =0 ; i < 5; ++i ){
+            System.out.println(u.amis[i]);
+        }
     }
 }

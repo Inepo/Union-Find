@@ -1,6 +1,6 @@
 public class UnionFind {
 
-    private int[] amis;
+    public int[] amis;
     private int nbHabitant;
 
     public UnionFind(int nbH){
@@ -11,8 +11,16 @@ public class UnionFind {
         }
     }
 
+    public void verifhabitant(int habitant){
+        if (habitant < 0 || habitant >= amis.length) {
+            throw new IllegalArgumentException("L'habitant n° " + habitant + " n'a pas été trouvé");
+        }
+    }
+
     //union
     public void union (int habitant1, int habitant2){
+        verifhabitant(habitant1);
+        verifhabitant(habitant2);
         int r1 = habitant1;
         while(this.amis[r1] != r1){
             r1 = this.amis[r1];
@@ -25,6 +33,7 @@ public class UnionFind {
     }
 
     public int find (int habitant){
+        verifhabitant(habitant);
         int r = habitant;
         while(this.amis[r] != r){
             r = this.amis[r];
@@ -45,12 +54,14 @@ public class UnionFind {
 
         this.amis[this.nbHabitant-1] = this.nbHabitant-1;
     }
-    public void isolated(int Habitant) {
+
+    public void isolated(int habitant) {
+        verifhabitant(habitant);
         boolean firstOccurrenceFound = false;
         int min = 0;
 
         for (int i = 0; i < this.nbHabitant; ++i) {
-            if (this.amis[i] == Habitant && i != Habitant) {
+            if (this.amis[i] == habitant && i != habitant) {
                 if (!firstOccurrenceFound) {
                     min = i;
                     firstOccurrenceFound = true;
