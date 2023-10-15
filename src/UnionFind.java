@@ -11,19 +11,27 @@ public class UnionFind {
         }
     }
 
+    public void verifhabitant(int habitant){
+        if (habitant < 0 || habitant >= amis.length) {
+            throw new IllegalArgumentException("L'habitant n° " + habitant + " n'a pas été trouvé");
+        }
+    }
+
+    //union
     public void union (int habitant1, int habitant2){
+        verifhabitant(habitant1);
+        verifhabitant(habitant2);
         int r1 = habitant1;
         int r2 = habitant2;
         while(this.amis[r1] != r1 && this.amis[r2] != r2){
-            if(this.amis[r1] != r1)
-                r1 = this.amis[r1];
-            if(this.amis[r2] != r2)
-                r2 = this.amis[r2];
+            if(this.amis[r1] != r1) r1 = this.amis[r1];
+            if(this.amis[r2] != r2) r2 = this.amis[r2];
         }
         this.amis[r1] = r2;
     }
 
     public int find (int habitant){
+        verifhabitant(habitant);
         int r = habitant;
         while(this.amis[r] != r){
             r = this.amis[r];
@@ -45,12 +53,15 @@ public class UnionFind {
 
         this.amis[this.nbHabitant-1] = this.nbHabitant-1;
     }
-    public void isolated(int Habitant) {
+
+    public void isolated(int habitant) {
+        verifhabitant(habitant);
         boolean firstOccurrenceFound = false;
         int min = 0;
+        if(this.amis[habitant] != habitant) this.amis[habitant] = habitant;
 
         for (int i = 0; i < this.nbHabitant; ++i) {
-            if (this.amis[i] == Habitant && i != Habitant) {
+            if (this.amis[i] == habitant && i != habitant) {
                 if (!firstOccurrenceFound) {
                     min = i;
                     firstOccurrenceFound = true;
@@ -58,6 +69,17 @@ public class UnionFind {
                 this.amis[i] = min;
             }
         }
+    }
+
+    public String toString (){
+        StringBuilder sb = new StringBuilder();
+        sb.append("[");
+        for(int i = 0; i < this.nbHabitant; ++i){
+            if(i != this.nbHabitant - 1) sb.append(this.amis[i]+", ");
+            else sb.append(this.amis[i]);
+        }
+        sb.append("]");
+        return sb.toString();
     }
 
 

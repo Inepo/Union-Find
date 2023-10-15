@@ -8,11 +8,14 @@ public class Main {
         u.union(2,3);
         u.union(1,3);
 
-        int t = u.find(1);
 
+        int t = u.find(3);
+        System.out.println(t);
         u.addPeople();
         u.addPeople();
-        u.addPeople();
-        u.union(3,5);
+        u.isolated(2);
+        u.isolated(3);
+        System.out.println(u.toString());
+
     }
 }
