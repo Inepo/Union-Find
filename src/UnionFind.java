@@ -1,72 +1,57 @@
+import java.util.ArrayList;
+import java.util.List;
+
 public class UnionFind {
 
-    private int[] amis;
+    private ArrayList<Integer> amis;
     private int nbHabitant;
 
     public UnionFind(int nbH){
         this.nbHabitant = nbH;
-        this.amis = new int[this.nbHabitant];
+        this.amis = new ArrayList<>();
         for(int i = 0; i < this.nbHabitant; ++i){
-            this.amis[i] = i;
+            this.amis.add(i);
         }
     }
-
     public void verifhabitant(int habitant){
-        if (habitant < 0 || habitant >= amis.length) {
+        if (habitant < 0 || habitant >= amis.size()) {
             throw new IllegalArgumentException("L'habitant n° " + habitant + " n'a pas été trouvé");
         }
     }
 
-    //union
+    public int find (int habitant){
+        int r = habitant;
+        verifhabitant(habitant);
+        while(this.amis.get(r) != r)
+            r = this.amis.get(r);
+        return r;
+    }
+
     public void union (int habitant1, int habitant2){
         verifhabitant(habitant1);
         verifhabitant(habitant2);
-        int r1 = habitant1;
-        int r2 = habitant2;
-        while(this.amis[r1] != r1 && this.amis[r2] != r2){
-            if(this.amis[r1] != r1) r1 = this.amis[r1];
-            if(this.amis[r2] != r2) r2 = this.amis[r2];
+        int rep1 = this.find(habitant1);
+        int rep2 = this.find(habitant2);
+        if(rep1 != rep2){
+            if(rep1 < rep2) this.amis.set(habitant2, rep1);
+            else this.amis.set(habitant1, rep2);
         }
-        this.amis[r1] = r2;
-    }
-
-    public int find (int habitant){
-        verifhabitant(habitant);
-        int r = habitant;
-        while(this.amis[r] != r){
-            r = this.amis[r];
-        }
-        return r; // Determine le représentant de l'habitant
     }
 
     public void addPeople(){
         ++this.nbHabitant;
-        int[] amistmp = new int[this.nbHabitant];
-        amistmp = this.amis;
-        /*for(int i = 0; i < this.nbHabitant - 1; ++i){
-            amistmp[i] = this.amis[i];
-        }*/
-        this.amis = new int[this.nbHabitant];
-        for(int i = 0; i < this.nbHabitant - 1; ++i){
-             this.amis[i] = amistmp[i];
-        }
-
-        this.amis[this.nbHabitant-1] = this.nbHabitant-1;
+        this.amis.add(nbHabitant - 1);
     }
 
     public void isolated(int habitant) {
         verifhabitant(habitant);
-        boolean firstOccurrenceFound = false;
-        int min = 0;
-        if(this.amis[habitant] != habitant) this.amis[habitant] = habitant;
+        int representant = this.find(habitant);
+
+        if(this.amis.get(habitant) != habitant) this.amis.set(habitant, habitant);
 
         for (int i = 0; i < this.nbHabitant; ++i) {
-            if (this.amis[i] == habitant && i != habitant) {
-                if (!firstOccurrenceFound) {
-                    min = i;
-                    firstOccurrenceFound = true;
-                }
-                this.amis[i] = min;
+            if (this.amis.get(i) == habitant && i != habitant) {
+                this.amis.set(i, representant);
             }
         }
     }
@@ -75,8 +60,8 @@ public class UnionFind {
         StringBuilder sb = new StringBuilder();
         sb.append("[");
         for(int i = 0; i < this.nbHabitant; ++i){
-            if(i != this.nbHabitant - 1) sb.append(this.amis[i]+", ");
-            else sb.append(this.amis[i]);
+            if(i != this.nbHabitant - 1) sb.append(this.amis.get(i)+", ");
+            else sb.append(this.amis.get(i));
         }
         sb.append("]");
         return sb.toString();
