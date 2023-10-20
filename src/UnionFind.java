@@ -8,7 +8,7 @@ public class UnionFind {
 
     public UnionFind(int nbH){
         this.nbHabitant = nbH;
-        this.amis = new ArrayList<>();
+        this.amis = new ArrayList<>(this.nbHabitant);
         for(int i = 0; i < this.nbHabitant; ++i){
             this.amis.add(i);
         }
@@ -19,11 +19,19 @@ public class UnionFind {
         }
     }
 
-    public int find (int habitant){
+    public int find (int habitant) {
         int r = habitant;
         verifhabitant(habitant);
-        while(this.amis.get(r) != r)
+        while (this.amis.get(r) != r) {
             r = this.amis.get(r);
+        }
+        int a = habitant;
+        int tmp;
+        while (this.amis.get(a) != a) {
+            tmp = a;
+            a = this.amis.get(tmp);
+            this.amis.set(tmp, r);
+        }
         return r;
     }
 
