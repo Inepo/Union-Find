@@ -1,4 +1,7 @@
+import java.util.Arrays;
+import java.util.List;
 import java.util.Random;
+import java.util.function.Function;
 
 public class Main {
     public static void main(String[] args) {
@@ -69,48 +72,81 @@ public class Main {
 
         System.out.println(u.toString());*/
 
-        /*final int MIN = 1_000_000, MAX = 50_000_000, PAS = 1_000_000;
-
-        Random r = new Random();
-        Random random = new Random();
-        for (int n = MIN; n <= MAX; n += PAS) {
-            //System.out.print(n + "\t");
-            UnionFind u = new UnionFind(n);
-            int randomNumber = random.nextInt(n) + 1;
-            long deb = System.nanoTime();
-            for( int i = 0; i < randomNumber; i++){
-                int hab1 = r.nextInt(n);
-                int hab2 = r.nextInt(n);
-                u.union(hab1,hab2);
-            }
-            long fin = System.nanoTime();
-
-            System.out.println(n + "\t" + ((fin - deb) / 1e6));
-        }*/
-
-        /*final int MIN = 10_000_000, MAX = 50_000_000, PAS = 1_000_000;
-        //final int MIN = 100, MAX = 1000, PAS = 100;
+        /*
+        //Test compléxité moyenne en temps de la méthode Union
+        final int MIN = 1_000_000, MAX = 10_000_000, PAS = 1_000_000;
 
         Random r = new Random();
         Random r2 = new Random();
         for (int n = MIN; n <= MAX; n += PAS) {
-            //System.out.print(n + "\t");
             UnionFind u = new UnionFind(n);
-
-            long deb = System.nanoTime();
-            for( int i = 0; i < r2.nextInt(n); i++){
+            long temps = 0;
+            //int NB = 100;
+            int NB = r2.nextInt(n) + 1;
+            for( int i = 0; i < NB; i++){
                 int hab1 = r.nextInt(n);
                 int hab2 = r.nextInt(n);
-                //System.out.println(hab1 +hab2);
+                long deb = System.nanoTime();
                 u.union(hab1,hab2);
+                long fin = System.nanoTime();
+                temps += (fin - deb);
             }
-            long fin = System.nanoTime();
-            System.out.println(n + "\t" + (fin - deb) / 1e6);
-            //System.out.println(u.toString());
-            //break;
+
+
+            System.out.println(n + "\t" + ((temps/NB))/1e6);
+          }*/
+
+
+        /*//Test compléxité moyenne en mémoire de la méthode Union
+        final int MIN = 1_000_000, MAX = 10_000_000, PAS = 1_000_000;
+
+        Random r = new Random();
+        Random r2 = new Random();
+        for (int n = MIN; n <= MAX; n += PAS) {
+            long temps = 0;
+            //int NB = 100;
+            int NB = r2.nextInt(n) + 1;
+            Observer ob = new Observer(NB);
+            UnionFind u = new UnionFind(n, ob);
+            for( int i = 0; i < NB; i++){
+                int hab1 = r.nextInt(n);
+                int hab2 = r.nextInt(n);
+                long deb = System.nanoTime();
+                u.union(hab1,hab2);
+                long fin = System.nanoTime();
+                temps += (fin - deb);
+            }
+
+
+            System.out.println(n + "\t" + ob);
         }*/
 
+        /*
+        //Test compléxité moyenne en temps de la méthode find
+        final int MIN = 1_000_000, MAX = 10_000_000, PAS = 1_000_000;
+
+        Random r = new Random();
+        Random r2 = new Random();
+        for (int n = MIN; n <= MAX; n += PAS) {
+            UnionFind u = new UnionFind(n);
+            long temps = 0;
+            //int NB = 100;
+            int NB = r2.nextInt(n) + 1;
+            for (int i = 0; i < NB; i++) {
+                int hab1 = r.nextInt(n);
+                int hab2 = r.nextInt(n);
+                u.union(hab1, hab2);
+
+            }
+            for (int i = 0; i < NB; i++) {
+                long deb = System.nanoTime();
+                u.find(r.nextInt(n));
+                long fin = System.nanoTime();
+                temps += (fin - deb);
+            }
+            System.out.println(n + "\t" + ((temps / NB)) / 1e6);
 
 
+        }*/
     }
 }

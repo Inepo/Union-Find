@@ -26,7 +26,7 @@ public class Observer {
     // pour afficher
     @Override
     public String toString() {
-        return "nb operations " + (countOp/nombre) + ", taille max de la pile d'appels : " + maxStackSize;
+        return "nombre d'operations " + (countOp/nombre) + ", taille max de la pile d'appels : " + maxStackSize;
     }
 
 
