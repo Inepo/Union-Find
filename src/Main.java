@@ -111,10 +111,7 @@ public class Main {
             for( int i = 0; i < NB; i++){
                 int hab1 = r.nextInt(n);
                 int hab2 = r.nextInt(n);
-                long deb = System.nanoTime();
                 u.union(hab1,hab2);
-                long fin = System.nanoTime();
-                temps += (fin - deb);
             }
 
 
@@ -148,5 +145,32 @@ public class Main {
 
 
         }*/
+
+        /*
+        //Test compléxité moyenne en mémoire de la méthode find
+        final int MIN = 1_000_000, MAX = 10_000_000, PAS = 1_000_000;
+
+        Random r = new Random();
+        Random r2 = new Random();
+        for (int n = MIN; n <= MAX; n += PAS) {
+             int NB = r2.nextInt(n) + 1;
+            Observer ob = new Observer(NB);
+            UnionFind u = new UnionFind(n, ob);
+            long temps = 0;
+            //int NB = 100;
+            for (int i = 0; i < NB; i++) {
+                int hab1 = r.nextInt(n);
+                int hab2 = r.nextInt(n);
+                u.union(hab1, hab2);
+
+            }
+            for (int i = 0; i < NB; i++) {
+                u.find(r.nextInt(n));
+            }
+            System.out.println(n + "\t" + ob);
+
+
+        }
+         */
     }
 }

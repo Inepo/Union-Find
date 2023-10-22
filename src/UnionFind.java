@@ -27,47 +27,67 @@ public class UnionFind {
     }
 
     public int find (int habitant) {
-       /* o.enter();
-        o.incOp();
+       //o.enter();
+       //o.incOp();
         int r = habitant;
         while (this.amis.get(r) != r) {
             r = this.amis.get(r);
         }
-       o.incOp();
+       // o.incOp();
         int a = habitant;
-        o.incOp();
+       // o.incOp();
         int tmp;
         while (this.amis.get(a) != a) {
             tmp = a;
             a = this.amis.get(tmp);
             this.amis.set(tmp, r);
         }
-        o.exit();
-        return r;*/
+       // o.exit();
+        return r;
 
-        o.enter();
-        o.incOp();
+      /* // o.enter();
+       // o.incOp();
         int r = habitant;
-        o.incOp();
+       // o.incOp();
         int tmp;
         while (this.amis.get(r) != r){
             tmp = r;
             r = this.amis.get(r);
             this.amis.set(tmp, r);
         }
-        o.exit();
-        return r;
+       // o.exit();
+        return r;*/
 
     }
 
+   /* public int find2(int habitant){
+        //o.enter();
+        //o.incOp();
+        int r = habitant;
+        while (this.amis.get(r) != r) {
+            r = this.amis.get(r);
+        }
+       // o.incOp();
+        int a = habitant;
+      //  o.incOp();
+        int tmp;
+        while (this.amis.get(a) != a) {
+            tmp = a;
+            a = this.amis.get(tmp);
+            this.amis.set(tmp, r);
+        }
+       // o.exit();
+        return r;
+    }*/
+
     public void union (int habitant1, int habitant2){
-       o.enter();
-        o.incOp();
+        //o.enter();
+        //o.incOp();
         int rep1 = this.find(habitant1);
-        o.incOp();
+        //o.incOp();
         int rep2 = this.find(habitant2);
             if(rep1 < rep2) this.amis.set(habitant2, rep1);
-        o.exit();
+        //o.exit();
     }
 
     public void addPeople(){
