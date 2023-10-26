@@ -72,7 +72,7 @@ public class Main {
 
         System.out.println(u.toString());*/
 
-        /*
+
         //Test compléxité moyenne en temps de la méthode Union
         final int MIN = 1_000_000, MAX = 10_000_000, PAS = 1_000_000;
 
@@ -94,7 +94,7 @@ public class Main {
 
 
             System.out.println(n + "\t" + ((temps/NB))/1e6);
-          }*/
+          }
 
 
         /*//Test compléxité moyenne en mémoire de la méthode Union
