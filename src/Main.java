@@ -75,6 +75,7 @@ public class Main {
 
         //Test compléxité moyenne en temps de la méthode Union
         final int MIN = 1_000_000, MAX = 10_000_000, PAS = 1_000_000;
+        final int MIN1 = 1000, MAX1 = 10000, PAS1 = 1_000;
 
         Random r = new Random();
         Random r2 = new Random();
@@ -83,17 +84,22 @@ public class Main {
             long temps = 0;
             //int NB = 100;
             int NB = r2.nextInt(n) + 1;
-            for( int i = 0; i < NB; i++){
-                int hab1 = r.nextInt(n);
-                int hab2 = r.nextInt(n);
-                long deb = System.nanoTime();
-                u.union(hab1,hab2);
-                long fin = System.nanoTime();
-                temps += (fin - deb);
+            System.out.println("Pour une taille " + n + " : ");
+            int j = 0;
+            for( int i = MIN1; i <= MAX1; i+=PAS1){
+                for(j = 0; j<i; j++){
+                    int hab1 = r.nextInt(n);
+                    int hab2 = r.nextInt(n);
+                    long deb = System.nanoTime();
+                    u.union(hab1,hab2);
+                    long fin = System.nanoTime();
+                    temps += (fin - deb);
+                }
+                if(j < i-1)
+                    System.out.print(i + "\t" + ((temps/j))/1e6 + " ");
+                else
+                    System.out.println(i + "\t" + ((temps/j))/1e6 + " ");
             }
-
-
-            System.out.println(n + "\t" + ((temps/NB))/1e6);
           }
 
 
