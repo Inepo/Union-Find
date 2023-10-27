@@ -74,8 +74,8 @@ public class Main {
 
 
         //Test compléxité moyenne en temps de la méthode Union
-        final int MIN = 1_000_000, MAX = 10_000_000, PAS = 1_000_000;
-        final int MIN1 = 1000, MAX1 = 10000, PAS1 = 1_000;
+        final int MIN = 2_000_000, MAX = 10_000_000, PAS = 2_000_000;
+        final int MIN1 = 200_000, MAX1 = 1_000_000, PAS1 = 200_000;
 
         Random r = new Random();
         Random r2 = new Random();
@@ -96,9 +96,9 @@ public class Main {
                     temps += (fin - deb);
                 }
                 if(j < i-1)
-                    System.out.print(i + "\t" + ((temps/j))/1e6 + " ");
+                    System.out.print(i + "\t" + (temps)/1e6 + " ");
                 else
-                    System.out.println(i + "\t" + ((temps/j))/1e6 + " ");
+                    System.out.println(i + "\t" + (temps)/1e6 + " ");
             }
           }
 
