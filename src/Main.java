@@ -88,10 +88,10 @@ public class Main {
             int j = 0;
             for( int i = MIN1; i <= MAX1; i+=PAS1){
                 for(j = 0; j<i; j++){
-                    int hab1 = r.nextInt(n);
+                    int hab = r.nextInt(n);
                     int hab2 = r.nextInt(n);
                     long deb = System.nanoTime();
-                    u.union(hab1,hab2);
+                    u.union(hab,hab2);
                     long fin = System.nanoTime();
                     temps += (fin - deb);
                 }
