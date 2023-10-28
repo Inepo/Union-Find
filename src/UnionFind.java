@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-import java.util.List;
 
 public class UnionFind {
 
@@ -33,52 +32,19 @@ public class UnionFind {
         while (this.amis.get(r) != r) {
             r = this.amis.get(r);
         }
-       // o.incOp();
+        //o.incOp();
         int a = habitant;
-       // o.incOp();
+        //o.incOp();
         int tmp;
         while (this.amis.get(a) != a) {
             tmp = a;
             a = this.amis.get(tmp);
             this.amis.set(tmp, r);
         }
-       // o.exit();
+      // o.exit();
         return r;
-
-      /* // o.enter();
-       // o.incOp();
-        int r = habitant;
-       // o.incOp();
-        int tmp;
-        while (this.amis.get(r) != r){
-            tmp = r;
-            r = this.amis.get(r);
-            this.amis.set(tmp, r);
-        }
-       // o.exit();
-        return r;*/
 
     }
-
-   /* public int find2(int habitant){
-        //o.enter();
-        //o.incOp();
-        int r = habitant;
-        while (this.amis.get(r) != r) {
-            r = this.amis.get(r);
-        }
-       // o.incOp();
-        int a = habitant;
-      //  o.incOp();
-        int tmp;
-        while (this.amis.get(a) != a) {
-            tmp = a;
-            a = this.amis.get(tmp);
-            this.amis.set(tmp, r);
-        }
-       // o.exit();
-        return r;
-    }*/
 
     public void union (int habitant1, int habitant2){
         //o.enter();
@@ -90,23 +56,47 @@ public class UnionFind {
         //o.exit();
     }
 
-    public void addPeople(){
+    public void addPeople() {
         ++this.nbHabitant;
+        if (this.nbHabitant > this.amis.size()) {
+            this.amis.ensureCapacity(this.nbHabitant);
+        }
         this.amis.add(nbHabitant - 1);
     }
 
+
     public void isolated(int habitant) {
-        int representant = this.find(habitant);
+        int representant = find(habitant);
 
-        if(this.amis.get(habitant) != habitant) this.amis.set(habitant, habitant);
+        if (representant == habitant) {
+            // Si habitant est son propre représentant, cherchons un autre représentant parmi ses amis
+            boolean foundAnotherRepresentant = false;
 
+            for (int i = 0; i < this.nbHabitant; ++i) {
+                int friend = this.amis.get(i);
+
+                if (friend == habitant && i != habitant) {
+                    if (!foundAnotherRepresentant) {
+                        representant = i;
+                        foundAnotherRepresentant = true;
+                    }
+                    this.amis.set(i, representant);
+                }
+            }
+        }
+
+        // Mettre à jour les amis de habitant pour qu'ils pointent vers le représentant
         for (int i = 0; i < this.nbHabitant; ++i) {
             if (this.amis.get(i) == habitant && i != habitant) {
                 this.amis.set(i, representant);
             }
         }
-    }
 
+        // Si habitant n'est pas déjà son propre représentant, le définir comme tel
+        if (this.amis.get(habitant) != habitant) {
+            this.amis.set(habitant, habitant);
+        }
+    }
     public String toString (){
         StringBuilder sb = new StringBuilder();
         sb.append("[");
@@ -117,8 +107,5 @@ public class UnionFind {
         sb.append("]");
         return sb.toString();
     }
-
-
-
 
 }

@@ -3,11 +3,7 @@ public class Observer {
     private int stackSize = 0;
     private int maxStackSize = 0;
 
-    private int nombre;
 
-    public Observer(int nb){
-        nombre = nb;
-    }
 
     // pour compter les opérations élémentaires (addition, multiplication) et de déclaration de variabme
     public void incOp() {
@@ -26,7 +22,7 @@ public class Observer {
     // pour afficher
     @Override
     public String toString() {
-        return "nombre d'operations " + (countOp/nombre) + ", taille max de la pile d'appels : " + maxStackSize;
+        return (countOp+ "\t" + maxStackSize);
     }
 
 

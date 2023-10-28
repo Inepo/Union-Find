@@ -1,4 +1,5 @@
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
 import java.util.function.Function;
@@ -6,8 +7,8 @@ import java.util.function.Function;
 public class Main {
     public static void main(String[] args) {
 
-
-        /*UnionFind u = new UnionFind(11);
+        /*
+        UnionFind u = new UnionFind(11);
 
         System.out.println(u.toString());
 
@@ -21,7 +22,7 @@ public class Main {
         u.union(10,4);
         u.union(1,2);
         System.out.println(u.toString());
-        System.out.println();
+
 
         System.out.println("Le représentant de 2 est : " + u.find(2));
         System.out.println("Le représentant de 10 est : " + u.find(10));
@@ -40,7 +41,12 @@ public class Main {
         u.union(5,12);
         u.union(12,14);
 
-        System.out.println(u.toString());*/
+        System.out.println(u.toString());
+
+        u.isolated(3);
+        System.out.println(u.toString());
+
+        HashMap<String, String> k = new HashMap<>();
 
         /*UnionFind v = new UnionFind(6);
         System.out.println(v.toString());
@@ -55,11 +61,6 @@ public class Main {
 
         System.out.println(v.toString());*/
 
-
-
-
-
-
         /*u.union(1,3);
 
         int t = u.find(3);
@@ -73,7 +74,9 @@ public class Main {
         System.out.println(u.toString());*/
 
 
-        //Test compléxité moyenne en temps de la méthode Union
+
+
+        /*//Test compléxité moyenne en temps de la méthode Union
         final int MIN = 2_000_000, MAX = 10_000_000, PAS = 2_000_000;
         final int MIN1 = 200_000, MAX1 = 1_000_000, PAS1 = 200_000;
 
@@ -100,28 +103,27 @@ public class Main {
                 else
                     System.out.println(i + "\t" + (temps)/1e6 + " ");
             }
-          }
+          }*/
 
 
         /*//Test compléxité moyenne en mémoire de la méthode Union
         final int MIN = 1_000_000, MAX = 10_000_000, PAS = 1_000_000;
+        final int MIN1 = 200_000, MAX1 = 1_000_000, PAS1 = 200_000;
 
         Random r = new Random();
-        Random r2 = new Random();
+        int j = 0;
         for (int n = MIN; n <= MAX; n += PAS) {
-            long temps = 0;
-            //int NB = 100;
-            int NB = r2.nextInt(n) + 1;
-            Observer ob = new Observer(NB);
+            Observer ob = new Observer();
             UnionFind u = new UnionFind(n, ob);
-            for( int i = 0; i < NB; i++){
-                int hab1 = r.nextInt(n);
-                int hab2 = r.nextInt(n);
-                u.union(hab1,hab2);
+            System.out.println("Pour une taille " + n + " : nombre de variable déclaré  : taille max de la pile d'appels ");
+            for (int i = MIN1; i <= MAX1; i += PAS1) {
+                for (j = 0; j < i; j++) {
+                    int hab = r.nextInt(n);
+                    int hab2 = r.nextInt(n);
+                    u.union(hab, hab2);
+                }
+                System.out.println(i + "\t" + ob + " ");
             }
-
-
-            System.out.println(n + "\t" + ob);
         }*/
 
         /*
@@ -178,5 +180,36 @@ public class Main {
 
         }
          */
+
+        /*//Test compléxité moyenne en temps de la méthode Union
+        final int MIN = 2_000_000, MAX = 10_000_000, PAS = 2_000_000;
+        final int MIN1 = 200_000, MAX1 = 1_000_000, PAS1 = 200_000;
+
+        Random r = new Random();
+        for (int n = MIN; n <= MAX; n += PAS) {
+            UnionFind u = new UnionFind(n);
+            long temps = 0;
+            //int NB = 100;
+            System.out.println("Pour une taille " + n + " : ");
+            int j = 0;
+            for( int i = MIN1; i <= MAX1; i+=PAS1){
+                for(j = 0; j<i; j++){
+                    int hab = r.nextInt(n);
+                    int hab2 = r.nextInt(n);
+                    u.union(hab,hab2);
+                }
+                for(j = 0; j<i; j++){
+                    long deb = System.nanoTime();
+                    u.addPeople();
+                    long fin = System.nanoTime();
+                    temps += (fin - deb);
+                }
+                if(j < i-1)
+                    System.out.print(i + "\t" + (temps)/1e6 + " ");
+                else
+                    System.out.println(i + "\t" + (temps)/1e6 + " ");
+            }
+          }*/
+
     }
 }
