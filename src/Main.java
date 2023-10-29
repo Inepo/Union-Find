@@ -214,7 +214,7 @@ public class Main {
                     int hab2 = r.nextInt(n);
                     u.union(hab1, hab2);
                 }
-                System.out.println(i + " union \t" + ob.toString() + " ");
+                System.out.println(i + " union \t" + ob + " ");
             }
 
             ob = new Observer();
@@ -226,7 +226,7 @@ public class Main {
                     int habfind = r.nextInt(n);
                     u.find(habfind);
                 }
-                System.out.println(i + " find\t" + ob.toString() + " ");
+                System.out.println(i + " find\t" + ob + " ");
             }
 
             ob = new Observer();
@@ -237,7 +237,7 @@ public class Main {
                 for (j = 0; j < i; j++) {
                     u.addPeople();
                 }
-                System.out.println(i + " addpeople\t" + ob.toString() + " ");
+                System.out.println(i + " addpeople\t" + ob + " ");
             }
 
             ob = new Observer();
@@ -249,7 +249,7 @@ public class Main {
                     int hab = r.nextInt(n);
                     u.isolated(hab);
                 }
-                System.out.println(i + " isolate \t" + ob.toString() + " ");
+                System.out.println(i + " isolate \t" + ob+ " ");
             }
 
 
