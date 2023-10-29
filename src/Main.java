@@ -73,45 +73,80 @@ public class Main {
 
         System.out.println(u.toString());*/
 
+/*
 
 
-
-        /*//Test compléxité moyenne en temps de la méthode Union
-        final int MIN = 2_000_000, MAX = 10_000_000, PAS = 2_000_000;
+        ///Test compléxité moyenne en temps de la méthode Union
+        final int MIN = 10_000_000, MAX = 50_000_000, PAS = 10_000_000;
         final int MIN1 = 200_000, MAX1 = 1_000_000, PAS1 = 200_000;
+
 
         Random r = new Random();
         Random r2 = new Random();
         for (int n = MIN; n <= MAX; n += PAS) {
             UnionFind u = new UnionFind(n);
-            long temps = 0;
+            long tempsUnion = 0;
+            long tempsFind =0;
             //int NB = 100;
             int NB = r2.nextInt(n) + 1;
             System.out.println("Pour une taille " + n + " : ");
             int j = 0;
             for( int i = MIN1; i <= MAX1; i+=PAS1){
                 for(j = 0; j<i; j++){
-                    int hab = r.nextInt(n);
+                    int hab1 = r.nextInt(n);
                     int hab2 = r.nextInt(n);
                     long deb = System.nanoTime();
-                    u.union(hab,hab2);
+                    u.union(hab1,hab2);
                     long fin = System.nanoTime();
-                    temps += (fin - deb);
+                    tempsUnion += (fin - deb);
+
+                    //MESURER FIND
+                    int hab3 =  r.nextInt(n);
+                    long start = System.nanoTime();
+                    u.find(hab3);
+                    long end = System.nanoTime();
+                    tempsFind += (end - start);
                 }
-                if(j < i-1)
-                    System.out.print(i + "\t" + (temps)/1e6 + " ");
+                /*if(j < i-1)
+                    System.out.print(i + " Union \t" + (tempsUnion)/1e6 + " ");
                 else
-                    System.out.println(i + "\t" + (temps)/1e6 + " ");
+                    System.out.println(i + " Union \t" + (tempsUnion)/1e6 + " ");
+
+
+                if(j < i-1)
+                    System.out.print(i + " find \t" + (tempsFind)/1e6 + " ");
+                else
+                    System.out.println(i + " find \t" + (tempsFind)/1e6 + " ");
             }
           }*/
 
+        /*********************** DEBUT TEST MEMOIRE  ***********************/
 
-        /*//Test compléxité moyenne en mémoire de la méthode Union
-        final int MIN = 1_000_000, MAX = 10_000_000, PAS = 1_000_000;
-        final int MIN1 = 200_000, MAX1 = 1_000_000, PAS1 = 200_000;
+/*
+        //Test compléxité moyenne en mémoire
+        final int MIN = 100_000, MAX = 500_000, PAS = 100_000;
+        final int MIN1 = 1_000, MAX1 = 5_000, PAS1 = 1_000;
 
         Random r = new Random();
         int j = 0;
+
+        ///la methode isolate
+        for (int n = MIN; n <= MAX; n += PAS) {
+            Observer ob = new Observer();
+            UnionFind u = new UnionFind(n, ob);
+            System.out.println("Pour une taille " + n + " : nombre de variable déclaré  : taille max de la pile d'appels ");
+            for (int i = MIN1; i <= MAX1; i += PAS1) {
+                //System.out.pri ntln("La " +i);
+                for (j = 0; j < i; j++) {
+                    int hab = r.nextInt(n);
+                    //int hab2 = r.nextInt(n);
+                    u.isolated(hab);
+                }
+                System.out.println(i + " isolate \t" + ob.toString() + " ");
+            }
+        }
+
+        ///la methode addpeople
         for (int n = MIN; n <= MAX; n += PAS) {
             Observer ob = new Observer();
             UnionFind u = new UnionFind(n, ob);
@@ -119,12 +154,117 @@ public class Main {
             for (int i = MIN1; i <= MAX1; i += PAS1) {
                 for (j = 0; j < i; j++) {
                     int hab = r.nextInt(n);
-                    int hab2 = r.nextInt(n);
-                    u.union(hab, hab2);
+                    u.addPeople();
                 }
-                System.out.println(i + "\t" + ob + " ");
+                System.out.println(i + " addpeople\t" + ob.toString() + " ");
             }
-        }*/
+        }
+
+        ///la methode union
+        for (int n = MIN; n <= MAX; n += PAS) {
+            Observer ob = new Observer();
+            UnionFind u = new UnionFind(n, ob);
+            System.out.println("Pour une taille " + n + " : nombre de variable déclaré  : taille max de la pile d'appels ");
+            for (int i = MIN1; i <= MAX1; i += PAS1) {
+                for (j = 0; j < i; j++) {
+                    int hab1 = r.nextInt(n);
+                    int hab2 = r.nextInt(n);
+                    u.union(hab1,hab2);
+                }
+                System.out.println(i + " union\t" + ob.toString() + " ");
+            }
+        }
+
+        ///la methode find
+
+        for (int n = MIN; n <= MAX; n += PAS) {
+            Observer ob = new Observer();
+            UnionFind u = new UnionFind(n, ob);
+            System.out.println("Pour une taille " + n + " : nombre de variable déclaré  : taille max de la pile d'appels ");
+            for (int i = MIN1; i <= MAX1; i += PAS1) {
+                for (j = 0; j < i; j++) {
+                    int habfind = r.nextInt(n);
+
+                    u.find(habfind);
+                }
+                System.out.println(i + "find \t" + ob.toString() + " ");
+            }
+        }
+        /*********************** FIN TEST MEMOIRE  ***********************/
+
+
+        /*********************** DEBUT TEST MEMOIRE OPTIMISE ***********************/
+        final int MIN = 100_000, MAX = 500_000, PAS = 100_000;
+        final int MIN1 = 1_000, MAX1 = 5_000, PAS1 = 1_000;
+
+        Random r = new Random();
+        int j = 0;
+
+        for (int n = MIN; n <= MAX; n += PAS) {
+            Observer ob = new Observer();
+            UnionFind u = new UnionFind(n, ob);
+            System.out.println("Pour une taille " + n + " : nombre de variable déclaré  : taille max de la pile d'appels ");
+
+
+
+            // Test de la méthode union
+            for (int i = MIN1; i <= MAX1; i += PAS1) {
+                for (j = 0; j < i; j++) {
+                    int hab1 = r.nextInt(n);
+                    int hab2 = r.nextInt(n);
+                    u.union(hab1, hab2);
+                }
+                System.out.println(i + " union \t" + ob.toString() + " ");
+            }
+
+            ob = new Observer();
+            u = new UnionFind(n, ob);
+
+            //  méthode find
+            for (int i = MIN1; i <= MAX1; i += PAS1) {
+                for (j = 0; j < i; j++) {
+                    int habfind = r.nextInt(n);
+                    u.find(habfind);
+                }
+                System.out.println(i + " find\t" + ob.toString() + " ");
+            }
+
+            ob = new Observer();
+            u = new UnionFind(n, ob);
+
+            //  méthode addPeople
+            for (int i = MIN1; i <= MAX1; i += PAS1) {
+                for (j = 0; j < i; j++) {
+                    u.addPeople();
+                }
+                System.out.println(i + " addpeople\t" + ob.toString() + " ");
+            }
+
+            ob = new Observer();
+            u = new UnionFind(n, ob);
+
+            //  méthode isolated
+            for (int i = MIN1; i <= MAX1; i += PAS1) {
+                for (j = 0; j < i; j++) {
+                    int hab = r.nextInt(n);
+                    u.isolated(hab);
+                }
+                System.out.println(i + " isolate \t" + ob.toString() + " ");
+            }
+
+
+        }
+        /*********************** FIN TEST MEMOIRE OPTIMISE ***********************/
+
+
+
+
+
+
+
+
+
+
 
         /*
         //Test compléxité moyenne en temps de la méthode find
