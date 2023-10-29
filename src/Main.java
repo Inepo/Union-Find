@@ -2,7 +2,7 @@ import java.util.Random;
 
 public class Main {
     public static void main(String[] args) {
-
+/*
 
         final int MIN = 2_000_000, MAX = 10_000_000, PAS = 2_000_000;
         final int MIN1 = 200_000, MAX1 = 1_000_000, PAS1 = 200_000;
@@ -41,7 +41,7 @@ public class Main {
                     int hab1 = r.nextInt(n);
                     int hab2 = r.nextInt(n);
                     long deb = System.nanoTime();
-                    u.union(hab1, hab2);
+                    u.find(hab1, hab2);
                     long fin = System.nanoTime();
                     tempsFind += (fin - deb);
                 }
@@ -56,7 +56,7 @@ public class Main {
                     int hab1 = r.nextInt(n);
                     int hab2 = r.nextInt(n);
                     long deb = System.nanoTime();
-                    u.union(hab1, hab2);
+                    u.addPeople(hab1, hab2);
                     long fin = System.nanoTime();
                     tempsAddpeople += (fin - deb);
                 }
@@ -87,12 +87,14 @@ public class Main {
             }
         }
 
-
+*/
         /*********************** DEBUT TEST MEMOIRE OPTIMISE ***********************/
-        /*
+
         final int MIN = 2_000_000, MAX = 10_000_000, PAS = 2_000_000;
 
-        final int MINREP = 1_000, MAXREP = 5_000, PASREP = 1_000;
+        final int MINREP = 200_000, MAXREP = 1_000_000, PASREP = 200_000;
+
+
 
         Random r = new Random();
         int j = 0;
@@ -137,19 +139,27 @@ public class Main {
                 System.out.println(i + " addpeople\t" + ob + " ");
             }
 
-            ob = new Observer();
-            u = new UnionFind(n, ob);
+
+        }
+
+        final int MINI = 100_000, MAXI = 500_000, PASI = 100_000;
+
+        final int MINIS = 1_000, MAXIS = 5_000, PASIS = 1_000;
+
+        for (int n = MINI; n <= MAXI; n += PASI) {
+            Observer ob = new Observer();
+            UnionFind u = new UnionFind(n, ob);
+            System.out.println("Pour une taille " + n + " : nombre de variable déclaré  : taille max de la pile d'appels ");
 
             // Test de la méthode isolated -> isolé des habitants
-            for (int i = MINREP; i <= MAXREP; i += PASREP) {
+            for (int i = MINIS; i <= MAXIS; i += PASIS) {
                 for (j = 0; j < i; j++) {
                     int hab = r.nextInt(n);
                     u.isolated(hab);
                 }
-                System.out.println(i + " isolate \t" + ob+ " ");
+                System.out.println(i + " isolate \t" + ob + " ");
             }
         }
-
         /*********************** FIN TEST MEMOIRE OPTIMISE ***********************/
 
 
