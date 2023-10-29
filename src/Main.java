@@ -1,8 +1,4 @@
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
 import java.util.Random;
-import java.util.function.Function;
 
 public class Main {
     public static void main(String[] args) {
@@ -120,82 +116,9 @@ public class Main {
             }
           }*/
 
-        /*********************** DEBUT TEST MEMOIRE  ***********************/
-
-/*
-        //Test compléxité moyenne en mémoire
-        final int MIN = 100_000, MAX = 500_000, PAS = 100_000;
-        final int MIN1 = 1_000, MAX1 = 5_000, PAS1 = 1_000;
-
-        Random r = new Random();
-        int j = 0;
-
-        ///la methode isolate
-        for (int n = MIN; n <= MAX; n += PAS) {
-            Observer ob = new Observer();
-            UnionFind u = new UnionFind(n, ob);
-            System.out.println("Pour une taille " + n + " : nombre de variable déclaré  : taille max de la pile d'appels ");
-            for (int i = MIN1; i <= MAX1; i += PAS1) {
-                //System.out.pri ntln("La " +i);
-                for (j = 0; j < i; j++) {
-                    int hab = r.nextInt(n);
-                    //int hab2 = r.nextInt(n);
-                    u.isolated(hab);
-                }
-                System.out.println(i + " isolate \t" + ob.toString() + " ");
-            }
-        }
-
-        ///la methode addpeople
-        for (int n = MIN; n <= MAX; n += PAS) {
-            Observer ob = new Observer();
-            UnionFind u = new UnionFind(n, ob);
-            System.out.println("Pour une taille " + n + " : nombre de variable déclaré  : taille max de la pile d'appels ");
-            for (int i = MIN1; i <= MAX1; i += PAS1) {
-                for (j = 0; j < i; j++) {
-                    int hab = r.nextInt(n);
-                    u.addPeople();
-                }
-                System.out.println(i + " addpeople\t" + ob.toString() + " ");
-            }
-        }
-
-        ///la methode union
-        for (int n = MIN; n <= MAX; n += PAS) {
-            Observer ob = new Observer();
-            UnionFind u = new UnionFind(n, ob);
-            System.out.println("Pour une taille " + n + " : nombre de variable déclaré  : taille max de la pile d'appels ");
-            for (int i = MIN1; i <= MAX1; i += PAS1) {
-                for (j = 0; j < i; j++) {
-                    int hab1 = r.nextInt(n);
-                    int hab2 = r.nextInt(n);
-                    u.union(hab1,hab2);
-                }
-                System.out.println(i + " union\t" + ob.toString() + " ");
-            }
-        }
-
-        ///la methode find
-
-        for (int n = MIN; n <= MAX; n += PAS) {
-            Observer ob = new Observer();
-            UnionFind u = new UnionFind(n, ob);
-            System.out.println("Pour une taille " + n + " : nombre de variable déclaré  : taille max de la pile d'appels ");
-            for (int i = MIN1; i <= MAX1; i += PAS1) {
-                for (j = 0; j < i; j++) {
-                    int habfind = r.nextInt(n);
-
-                    u.find(habfind);
-                }
-                System.out.println(i + "find \t" + ob.toString() + " ");
-            }
-        }
-        /*********************** FIN TEST MEMOIRE  ***********************/
-
-
         /*********************** DEBUT TEST MEMOIRE OPTIMISE ***********************/
         final int MIN = 100_000, MAX = 500_000, PAS = 100_000;
-        final int MIN1 = 1_000, MAX1 = 5_000, PAS1 = 1_000;
+        final int MINREP = 1_000, MAXREP = 5_000, PASREP = 1_000;
 
         Random r = new Random();
         int j = 0;
@@ -207,8 +130,8 @@ public class Main {
 
 
 
-            // Test de la méthode union
-            for (int i = MIN1; i <= MAX1; i += PAS1) {
+            // Test de la méthode union -> Unir des habitants
+            for (int i = MINREP; i <= MAXREP; i += PASREP) {
                 for (j = 0; j < i; j++) {
                     int hab1 = r.nextInt(n);
                     int hab2 = r.nextInt(n);
@@ -220,8 +143,8 @@ public class Main {
             ob = new Observer();
             u = new UnionFind(n, ob);
 
-            //  méthode find
-            for (int i = MIN1; i <= MAX1; i += PAS1) {
+            // Test de la méthode find -> Trouver le représentant
+            for (int i = MINREP; i <= MAXREP; i += PASREP) {
                 for (j = 0; j < i; j++) {
                     int habfind = r.nextInt(n);
                     u.find(habfind);
@@ -232,8 +155,8 @@ public class Main {
             ob = new Observer();
             u = new UnionFind(n, ob);
 
-            //  méthode addPeople
-            for (int i = MIN1; i <= MAX1; i += PAS1) {
+            // Test de la méthode addPeople -> Ajout d'habitant
+            for (int i = MINREP; i <= MAXREP; i += PASREP) {
                 for (j = 0; j < i; j++) {
                     u.addPeople();
                 }
@@ -243,16 +166,14 @@ public class Main {
             ob = new Observer();
             u = new UnionFind(n, ob);
 
-            //  méthode isolated
-            for (int i = MIN1; i <= MAX1; i += PAS1) {
+            // Test de la méthode isolated -> isolé des habitants
+            for (int i = MINREP; i <= MAXREP; i += PASREP) {
                 for (j = 0; j < i; j++) {
                     int hab = r.nextInt(n);
                     u.isolated(hab);
                 }
                 System.out.println(i + " isolate \t" + ob+ " ");
             }
-
-
         }
 
         /*********************** FIN TEST MEMOIRE OPTIMISE ***********************/
@@ -320,9 +241,9 @@ public class Main {
 
 
         }
-         */
-
-        /*//Test compléxité moyenne en temps de la méthode Union
+         
+        /*
+        //Test compléxité moyenne en temps de la méthode Union
         final int MIN = 2_000_000, MAX = 10_000_000, PAS = 2_000_000;
         final int MIN1 = 200_000, MAX1 = 1_000_000, PAS1 = 200_000;
 
@@ -330,9 +251,8 @@ public class Main {
         for (int n = MIN; n <= MAX; n += PAS) {
             UnionFind u = new UnionFind(n);
             long temps = 0;
-            //int NB = 100;
             System.out.println("Pour une taille " + n + " : ");
-            int j = 0;
+            int j;
             for( int i = MIN1; i <= MAX1; i+=PAS1){
                 for(j = 0; j<i; j++){
                     int hab = r.nextInt(n);
@@ -350,7 +270,7 @@ public class Main {
                 else
                     System.out.println(i + "\t" + (temps)/1e6 + " ");
             }
-          }*/
-
+          }
+        */
     }
 }
