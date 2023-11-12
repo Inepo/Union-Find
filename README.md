@@ -1,3 +1,7 @@
-# Union-Find
-Réalisation d'un mini-projet en déeveloppement efficace (R3.02) pour le S3 de BUT 2.
-Isra DHIAB et Ines KADJI 203.
+# Projet S3-02
+
+Équipe : 
+- Isra DHIAB
+- Ines KADJI
+
+Groupe : 203
